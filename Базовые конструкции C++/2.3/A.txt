@@ -1,0 +1,11 @@
+#include <iostream>
+
+int main()
+{
+    int stl_1, stl_2, str_1, str_2;
+    std::cin >> stl_1 >> str_1;
+    std::cin >> stl_2 >> str_2;
+    if (stl_1 == stl_2 || str_1 == str_2 || std::abs(stl_1 - stl_2) == std::abs(str_1 - str_2))
+    std::cout << "yes";
+    else std::cout << "no";
+}

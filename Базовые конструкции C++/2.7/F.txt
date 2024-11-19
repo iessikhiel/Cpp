@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <utility>
+
+using namespace std;
+
+struct Point
+{
+    int x, y;
+
+    int distanceSquared() const
+    {
+        return x * x + y * y;
+    }
+};
+
+int main() 
+{
+    int n;
+    cout << "Number of points: ";
+    cin >> n;
+
+    vector<Point> points(n);
+
+   
+    for (int i = 0; i < n; ++i)
+    {
+        cout << endl << "Coordinates of point number " << i + 1 << ": ";
+        cin >> points[i].x >> points[i].y;
+    }
+
+    sort(points.begin(), points.end(), [](const Point& a, const Point& b)
+        {
+            return a.distanceSquared() < b.distanceSquared();
+        });
+
+    cout << endl;
+
+    for (const auto& point : points) 
+    {
+        cout << point.x << " " << point.y << "\n";
+    }
+
+    return 0;
+}

@@ -1,0 +1,21 @@
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <limits>
+
+std::pair<size_t, size_t> MatrixArgMax(const std::vector<std::vector<int>>& matrix) {
+    size_t maxRow = 0, maxCol = 0;
+    int maxValue = std::numeric_limits<int>::min();
+
+    for (size_t i = 0; i < matrix.size(); ++i) {
+        for (size_t j = 0; j < matrix[i].size(); ++j) {
+            if (matrix[i][j] > maxValue) {
+                maxValue = matrix[i][j];
+                maxRow = i;
+                maxCol = j;
+            }
+        }
+    }
+
+    return { maxRow, maxCol };
+}

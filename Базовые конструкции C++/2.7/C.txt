@@ -1,0 +1,15 @@
+#include <string>
+#include <vector>
+
+std::vector<std::string> Split(const std::string& str, char delimiter) {
+    std::vector<std::string> result;
+    size_t i = 0;
+    for (size_t j = 0; j != str.size(); ++j) {
+        if (str[j] == delimiter) {
+            result.push_back(str.substr(i, j - i));
+            i = j + 1;
+        }
+    }
+    result.push_back(str.substr(i));
+    return result;
+}

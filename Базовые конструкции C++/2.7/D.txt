@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+string Join(const std::vector<std::string>& tokens, char delimiter)
+{
+		if (tokens.empty())
+		{
+			return "";
+		}
+
+		if (tokens.size() == 1)
+		{
+			return tokens[0];
+		}
+
+	string Res;
+	Res += tokens[0];
+
+	for (size_t i = 1; i < tokens.size(); i++)
+	{
+		Res += delimiter;
+		Res += tokens[i];
+	}
+	
+	return Res;
+
+}
