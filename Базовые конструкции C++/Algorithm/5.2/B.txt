@@ -1,0 +1,35 @@
+#include  <iostream>
+
+using namespace std;
+
+int GCD(long long a, long long b)
+{
+	while (a != b)
+	{
+		if (a > b)
+			a = a - b;
+		else
+			b = b - a;
+	}
+	return (a);
+}
+
+void LCM(long long a, long long b, int GCD)
+{
+	long long lcm = (a * b) / GCD;
+
+	cout << lcm;
+}
+
+int main()
+{
+	long long a, b;
+	int gcd;
+
+	cin >> a >> b;
+	gcd = GCD(a, b);
+
+	LCM(a, b, gcd);
+
+	return 0;
+}

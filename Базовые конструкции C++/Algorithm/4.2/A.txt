@@ -1,0 +1,15 @@
+#include <iostream>
+
+using namespace std;
+
+int summ(int first, int second)
+{
+    return (first + second);
+}
+
+int main()
+{
+    int a, b;
+    cin >> a >> b;
+    cout << summ(a, b);
+}
