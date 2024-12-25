@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int pisano_period(int m) {
+    int prev = 0;
+    int curr = 1;
+    for (int i = 0; i < m * m; ++i) 
+    {
+        int temp = (prev + curr) % m;
+        prev = curr;
+        curr = temp;
+
+        if (prev == 0 && curr == 1)
+        {
+            return i + 1;
+        }
+    }
+    return -1;
+}
+
+int fibonacci_mod(int n, int m) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+
+    int prev = 0;
+    int curr = 1;
+
+    for (int i = 2; i <= n; ++i) {
+        int new_curr = (prev + curr) % m;
+        prev = curr;
+        curr = new_curr;
+    }
+
+    return curr;
+}
+
+int main() {
+    long long n;
+    int m;
+    cin >> n >> m;
+
+    int period = pisano_period(m);
+
+    n = n % period;
+
+    int result = fibonacci_mod(n, m);
+
+    cout << result << endl;
+
+    return 0;
+}
