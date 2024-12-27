@@ -1,0 +1,23 @@
+#include <iostream>
+#include <set>
+#include <sstream>
+
+int main() {
+    std::string input;
+    std::getline(std::cin, input);
+
+    std::istringstream iss(input);
+    std::set<int> seen_numbers;
+    int number;
+
+    while (iss >> number) {
+        if (seen_numbers.find(number) != seen_numbers.end()) {
+            std::cout << "YES" << std::endl;
+        } else {
+            std::cout << "NO" << std::endl;
+            seen_numbers.insert(number);
+        }
+    }
+
+    return 0;
+}

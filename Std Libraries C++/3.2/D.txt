@@ -1,0 +1,37 @@
+#include <iostream>
+#include <map>
+#include <set>
+#include <string>
+
+int main() 
+{
+    int n;
+    std::cin >> n;
+    std::cin.ignore();
+
+    std::map<int, std::set<std::string>> index;
+
+    for (int i = 0; i < n; ++i) 
+    {
+        std::string line;
+        std::getline(std::cin, line);
+
+        size_t space_pos = line.find(' ');
+        std::string keyword = line.substr(0, space_pos);
+        int page_number = std::stoi(line.substr(space_pos + 1));
+
+        index[page_number].insert(keyword);
+    }
+
+    for (const auto& entry : index) 
+    {
+        std::cout << entry.first;
+        for (const auto& word : entry.second) 
+        {
+            std::cout << ' ' << word;
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}

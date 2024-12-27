@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+int main() {
+    std::vector<int> letter_count(26, 0);
+    std::string word;
+    int word_count = 0;
+
+    while (std::getline(std::cin, word)) 
+    {
+        std::vector<int> current_count(26, 0);
+
+
+        for (char c : word) {
+            current_count[c - 'a']++;
+        }
+
+        if (word_count == 0) {
+            letter_count = current_count;
+        } else {
+            for (int i = 0; i < 26; ++i) {
+                letter_count[i] = std::min(letter_count[i], current_count[i]);
+            }
+        }
+
+        word_count++;
+    }
+
+    std::string result;
+    for (int i = 0; i < 26; ++i) {
+        if (letter_count[i] > 0) {
+            result += std::string(letter_count[i], 'a' + i);
+        }
+    }
+
+    std::cout << result << std::endl;
+
+    return 0;
+}
