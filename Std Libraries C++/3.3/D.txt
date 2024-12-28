@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    int n, k;
+    std::cin >> n >> k;
+
+    std::vector<int> sortedArray(n);
+    for (int i = 0; i < n; ++i) {
+        std::cin >> sortedArray[i];
+    }
+
+    std::vector<int> queryArray(k);
+    for (int i = 0; i < k; ++i) {
+        std::cin >> queryArray[i];
+    }
+
+    for (int query : queryArray) 
+    {
+
+        auto it = std::lower_bound(sortedArray.begin(), sortedArray.end(), query);
+
+        int closest;
+        if (it == sortedArray.begin()) {
+
+            closest = *it;
+        } else if (it == sortedArray.end()) {
+
+            closest = *(it - 1);
+        } else {
+
+            int lower = *(it - 1);
+            int upper = *it;
+            closest = (std::abs(lower - query) <= std::abs(upper - query)) ? lower : upper;
+        }
+        
+        std::cout << closest << std::endl;
+    }
+
+    return 0;
+}
