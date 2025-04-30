@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <utility>
+#include <algorithm>
+
+using namespace std;
+
+struct Element 
+{
+    int value; 
+    int seqIndex;
+    int indexInSeq;
+
+    bool operator>(const Element& other) const 
+    {
+        return value > other.value;
+    }
+};
+
+int main() 
+{
+    int n;
+    cin >> n;
+    
+    vector<vector<int>> sequences(n);
+    for (int i = 0; i < n; ++i) 
+    {
+        int mi;
+        cin >> mi;
+        sequences[i].resize(mi);
+        for (int j = 0; j < mi; ++j) 
+        {
+            cin >> sequences[i][j];
+        }
+    }
+
+    priority_queue<Element, vector<Element>, greater<Element>> pq; 
+        if (!sequences[i].empty()) 
+        {
+            pq.push({sequences[i][0], i, 0});
+        }
+    }
+
+    vector<int> result;
+    while (!pq.empty()) 
+    {
+        Element current = pq.top();
+        pq.pop();
+        
+        result.push_back(current.value);
+        
+        if (current.indexInSeq + 1 < sequences[current.seqIndex].size()) {
+            pq.push({sequences[current.seqIndex][current.indexInSeq + 1], current.seqIndex, current.indexInSeq + 1});
+        }
+    }
+
+    for (int i = 0; i < result.size(); ++i) {
+        cout << result[i] << (i < result.size() - 1 ? ' ' : '\n'); 
+    }
+
+    return 0;
+}
