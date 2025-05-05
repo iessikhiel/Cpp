@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool Cover(const vector<int>& points, int length, int k) {
+    int count = 0;
+    int i = 0;
+    int n = points.size();
+
+    while (i < n) {
+        count++;
+        int coverStart = points[i];
+        while (i < n && points[i] <= coverStart + length) {
+            i++;
+        }
+    }
+
+    return count <= k;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> points(n);
+    for (int i = 0; i < n; i++) {
+        cin >> points[i];
+    }
+
+    sort(points.begin(), points.end());
+
+    int left = 0, right = points[n - 1] - points[0];
+    int result = right;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (Cover(points, mid, k)) {
+            result = mid;
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
+    }
+
+    cout << result << endl;
+    return 0;
+}

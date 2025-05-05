@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+
+using namespace std;
+
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void randomizedQuickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pivotIndex = low + rand() % (high - low + 1);
+        swap(arr[pivotIndex], arr[high]);
+        int partitionIndex = partition(arr, low, high);
+        randomizedQuickSort(arr, low, partitionIndex - 1);
+        randomizedQuickSort(arr, partitionIndex + 1, high);
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    randomizedQuickSort(arr, 0, n - 1);
+
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << " ";
+    }
+    
+    cout << endl;
+    return 0;
+}

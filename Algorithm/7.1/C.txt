@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> K(n);
+    for (int i = 0; i < n; i++) {
+        cin >> K[i];
+    }
+
+    int m;
+    cin >> m;
+    vector<int> Q(m);
+    for (int i = 0; i < m; i++) {
+        cin >> Q[i];
+    }
+
+    for (int i = 0; i < m; i++) {
+        int count = upper_bound(K.begin(), K.end(), Q[i]) - lower_bound(K.begin(), K.end(), Q[i]);
+        cout << count << endl;
+    }
+
+    return 0;
+}

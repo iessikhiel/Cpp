@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+int main() 
+{
+    int n;
+    cin >> n;
+    vector<int> sequence(n);
+    
+    for (int i = 0; i < n; ++i) 
+    {
+        cin >> sequence[i];
+    }
+
+    unordered_map<int, int> countMap;
+    for (int num : sequence) 
+    {
+        countMap[num]++;
+    }
+
+    int threshold = n / 4;
+    int resultCount = 0;
+
+    for (const auto& pair : countMap) 
+    {
+        if (pair.second > threshold) 
+        {
+            resultCount++;
+        }
+        if (resultCount >= 3) 
+        {
+            cout << 1 << endl;
+            return 0;
+        }
+    }
+
+    cout << 0 << endl;
+    return 0;
+}
